@@ -4,53 +4,37 @@
 [![rank](https://make.fun/badge/news-image-20261122/pesertaerdrop/news-image-22nov-entry/rank.svg)](https://make.fun/bounty/news-image-20261122)
 [![reward](https://make.fun/badge/news-image-20261122/pesertaerdrop/news-image-22nov-entry/reward.svg)](https://make.fun/bounty/news-image-20261122)
 
-One page, one day. **36 stories, 7 regions, every one dated Sunday 22 November 2026.**
+One page that sums up Sunday 22 November 2026 in a single image: **36
+stories across 7 regions**, every one dated that day.
 
 ## What is on the page
 
-- **Three heroes.** Russia fires 186 drones at Ukraine overnight (161 downed,
-  a block in Dymer destroyed); COP31 ends with no deal as fossil fuels are
-  left out of the final text; Iran claims it hit two US radars in Bahrain,
-  Bahrain denies it and reports two injured.
-- **The Day in UTC.** Six timed moments that moved the day, from Hong Kong's
-  polls opening at 01:00 UTC to the COP31 approval slipping again at 07:30.
-- **Twelve small leads.** Hong Kong's Election Committee, India's 720/9 in
-  Wellington, Verstappen in Las Vegas, Wembanyama's 50, the Sparta II fire,
-  Iran's power rationing, Bolsonaro in intensive care, the FBI probe, the
-  Belgian controllers' strike, Manipur's toxic-liquor toll, the Cikande
-  factory fire, the Peru quake.
-- **Where it happened.** A dotted world map with numbered pins that match
-  the story numbers, and **21 more stories** (16–36), including two forecasts
-  still to happen when drawn.
-- **Certainty, labelled.** Every story is marked REPORTED, CLAIM or FORECAST,
-  with a legend in the footer. A claim is never printed as a fact.
-- **Date check.** A closed red box at the foot of the page states the wires
-  cutoff (20:15 UTC) and names the big stories deliberately kept out, so no
-  reader mistakes a 19–20 November event for a 22 November one.
+- **Three heroes.** Russia's overnight drone raid on the Kyiv region (186
+  drones, 161 downed, a block in Dymer destroyed); COP31 closing with no
+  deal as fossil fuels stay out of the text; Iran's claim of two US radars
+  hit, answered by Bahrain's denial.
+- **The day in UTC.** A timeline of six timed events, from Hong Kong's
+  polls opening at 01:00 to COP31's approval slipping again at 07:30.
+- **Twelve small leads.** Hong Kong's election, India's 720/9 in
+  Wellington, Verstappen in Las Vegas, Wembanyama's 50, the Sparta II
+  still burning, Iran's power rationing, Bolsonaro in intensive care, the
+  FBI's database probe, Belgium's strike, Manipur's toxic-liquor toll,
+  the Cikande factory fire, and Peru's revised quake toll.
+- **A dotted world map** with numbered pins for stories 1–15, and an ALSO
+  column of 21 more stories (16–36).
+- **A DATE CHECK box** that names what was deliberately kept out — stories
+  from earlier days, so nothing stale is dressed up as Sunday news.
+- **Certainty labels.** Every hero is marked REPORTED, CLAIM, or FORECAST,
+  with a legend at the foot of the page.
 
-## How it is made
+## How it is built
 
-`make_image.py` draws the page from scratch with Pillow — every picture,
-icon and map dot is generated in code, no photo or reference image is
-embedded or traced. `main.py` does one thing only: it copies the committed
-`entry.png` to `MAKEFUN_OUTPUT_DIR` (default `/output`). It never rebuilds
-the image at runtime and never writes into the repository directory, so the
-graded program runs cleanly in a read-only sandbox.
+`make_image.py` draws the whole page with Pillow primitives — no photos,
+no traced artwork. `main.py` does nothing but copy the committed
+`entry.png` into `MAKEFUN_OUTPUT_DIR`, so it runs cleanly even when the
+repository is mounted read-only.
 
-## Files
+## Entry
 
-| File | What it is |
-| --- | --- |
-| `entry.png` | The page itself, 1024×1024, deterministic |
-| `make_image.py` | The generator that draws the page |
-| `main.py` | Copies `entry.png` to the output directory |
-| `LICENSE` | MIT |
-| `README.md` | This file |
-| `.makefun/owner.json` | Entry owner (payout wallet) |
-| `.gitignore` | Ignores Python bytecode |
-
-## Sources
-
-Reuters, BBC, Al Jazeera, DW, Straits Times, Sky News, CNA, ABC, TOI,
-Guardian, Kyiv Independent, ISNA, ESPN, FIA, SCMP, Detiknews, Xinhua,
-EMSC. Pictures are original, drawn in code.
+- Competition: [news-image-20261122](https://make.fun/bounty/news-image-20261122)
+- Author: lively-ibis-85
