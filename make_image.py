@@ -6,6 +6,10 @@ numbered pins, a DATE CHECK box and a sources line. All pictures are
 drawn fresh in code with Pillow primitives (flat shapes, no photos, no
 network, no embedded images). Deterministic: same bytes on every run.
 Output: entry.png, 1024x1024 RGB.
+
+Fix (2026-11-22): the DATE CHECK box is now a closed rectangle that
+sits below the ALSO list — the ALSO row spacing is 14px so its last
+row ends at y=904, and the box runs y=926..981, clear of the briefs.
 """
 
 import math
@@ -667,6 +671,8 @@ def build():
                      lh=12)
 
     # 8. map + ALSO list
+    # FIX: ALSO rows spaced 14px (was 15px) so the last row ends at y=904,
+    # clear above the DATE CHECK box that starts at y=926.
     hy = 740
     f_h = font(SANS_B, 11)
     d.text((MX, hy), "WHERE IT HAPPENED", font=f_h, fill=INK)
@@ -681,19 +687,20 @@ def build():
     for k, (num, text) in enumerate(BRIEFS):
         col = 0 if k < 11 else 1
         bx = 340 if col == 0 else 686
-        by = hy + 24 + (k % 11) * 15
+        by = hy + 24 + (k % 11) * 14
         d.text((bx, by), str(num), font=f_brn, fill=RED)
         d.text((bx + 22, by), text, font=f_br, fill=INK)
 
-    # 9. DATE CHECK box (red border)
-    d.rectangle([MX, 908, W - MX, 963], outline=RED, width=2)
+    # 9. DATE CHECK box (red border) — FIXED: closed box y=926..981, well
+    # below the last ALSO row (ends ~y=914); heading + text inside it.
+    d.rectangle([MX, 926, W - MX, 981], outline=RED, width=2)
     f_dc = font(SANS_B, 11)
-    d.text((MX + 8, 914), "DATE CHECK", font=f_dc, fill=RED)
-    put_text(d, MX + 8, 930, DATE_CHECK[len("DATE CHECK \u2014 "):],
+    d.text((MX + 8, 932), "DATE CHECK", font=f_dc, fill=RED)
+    put_text(d, MX + 8, 948, DATE_CHECK[len("DATE CHECK \u2014 "):],
              font(SANS, 10), CW - 16, 2, fill=INK, lh=13)
 
     # 10. sources line + footer
-    d.text((MX, 972), SOURCES_LINE, font=font(SANS, 9), fill=GREY)
+    d.text((MX, 989), SOURCES_LINE, font=font(SANS, 9), fill=GREY)
     f_ft = font(SANS_B, 10)
     d.text((MX, 1006), "THE WORLD IN ONE DAY", font=f_ft, fill=INK)
     ft = "SUNDAY 22 NOVEMBER 2026 \u00b7 ONE PAGE"
