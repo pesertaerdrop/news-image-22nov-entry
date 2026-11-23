@@ -1,35 +1,26 @@
-#!/usr/bin/env python3
-"""Hand over the finished front page.
+"""Hand the finished front page to the grader.
 
-The grading sandbox mounts this repository read-only, so this program must
-not create, rewrite, or rebuild anything inside the repository. Its only job
-is to take the image that is already committed here and place an identical
-copy in the writable directory the harness points at with
-MAKEFUN_OUTPUT_DIR ("/output" when the variable is not set).
-
-The picture itself is drawn by make_image.py during the build, never here.
+The image for this entry is already drawn and stored in this repository
+as entry.png. All this program does is place a copy of that file where
+the grader expects it. It creates nothing, draws nothing, and never
+writes into the repository, so it runs fine on a read-only checkout.
 """
 
 import os
 import shutil
-import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-SOURCE_NAME = "entry.png"
+# The finished image, kept beside this file in the repository.
+SOURCE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "entry.png")
 
 
-def main() -> int:
-    source = os.path.join(HERE, SOURCE_NAME)
-    if not os.path.isfile(source):
-        print("missing committed image: %s" % source, file=sys.stderr)
-        return 1
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
-    os.makedirs(out_dir, exist_ok=True)
-    target = os.path.join(out_dir, SOURCE_NAME)
-    shutil.copyfile(source, target)
-    print("delivered %s" % target)
-    return 0
+def deliver():
+    """Copy the committed image into the grader's output folder."""
+    folder = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    os.makedirs(folder, exist_ok=True)
+    destination = os.path.join(folder, "entry.png")
+    shutil.copyfile(SOURCE, destination)
+    print("delivered", destination)
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    deliver()
